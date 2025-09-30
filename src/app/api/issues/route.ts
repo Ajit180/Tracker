@@ -26,3 +26,22 @@ export async function POST(request:NextRequest){
 
     return NextResponse.json(newIssue, {status:201});
 }
+
+
+export async function GET(request:NextRequest){
+
+      try {
+        const issues = await prisma.issue.findMany({
+            orderBy:{createdAt:"desc"} // newest first
+        })
+
+        return NextResponse.json(issues, { status: 200 });
+        
+      } catch (error) {
+        console.error(error);
+        return NextResponse.json(
+          { message: "Failed to fetch issues" },
+          { status: 500 }
+        );
+      }
+}
