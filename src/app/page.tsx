@@ -5,7 +5,8 @@ import axios from "axios";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Loader } from "@/components/loader";
-import UpdateIssuePage from "./issues/update/page";
+import UpdateIssueCard from "@/components/updateCard";
+
 
 
 type Issue ={
@@ -89,7 +90,7 @@ const IssuePage = () => {
                 Created: {new Date(issue.createdAt).toLocaleString()}
               </p>
               <div>
-                <UpdateIssuePage issue={issue}/>
+                <UpdateIssueCard issue={issue}/>
               </div>
             </div>
           ))}

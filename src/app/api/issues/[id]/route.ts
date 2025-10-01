@@ -9,20 +9,24 @@ const updateStatusSchema = z.object({
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> } // here i didn't use the promsise await that why face in error
 ) {
   try {
+
+
     const body = await request.json();
+    const {id}= await context.params;
     const validation = updateStatusSchema.safeParse(body);
 
     if (!validation.success) {
       return NextResponse.json(validation.error, { status: 400 });
     }
 
-    const id = parseInt(params.id); //this comes from the URL (/api/issues/:id)
+    // const id =  parseInt(params.id); //this comes from the URL (/api/issues/:id)
+    console.log("id comes from the url",id);
 
     const updatedIssue = await prisma.issue.update({
-      where: { id },
+      where: { id:Number(id) },
       data: { status: body.status },
     });
 
