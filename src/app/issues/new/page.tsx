@@ -1,6 +1,5 @@
 'use client'
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import dynamic from "next/dynamic"
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), { ssr: false });

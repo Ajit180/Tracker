@@ -1,9 +1,21 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Issue } from "@prisma/client";
 import axios from "axios";
 
-export default function UpdateIssueCard({ issue }: { issue: any }) {
+
+type IssueResponse = Omit<Issue, "createdAt" | "updatedAt"> & {
+  createdAt: string;
+  updatedAt: string;
+};
+
+interface UpdateIssueCardProps {
+  issue: IssueResponse;
+}
+
+
+export default function UpdateIssueCard({ issue }: UpdateIssueCardProps) {
   const updateIssue = async (newStatus: "OPEN" | "IN_PROGRESS" | "CLOSED") => {
     await axios.patch(`/api/issues/${issue.id}`, { status: newStatus });
     alert(`Status updated to ${newStatus}`);

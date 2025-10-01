@@ -27,7 +27,7 @@ export async function POST(request:NextRequest){
 }
 
 
-export async function GET(request:NextRequest){
+export async function GET(){
 
       try {
         const issues = await prisma.issue.findMany({
@@ -36,7 +36,7 @@ export async function GET(request:NextRequest){
 
         return NextResponse.json(issues, { status: 200 });
         
-      } catch (error:any) {
+      } catch (error) {
         console.error(error);
         return NextResponse.json(
           { message: "Failed to fetch issues" },
