@@ -1,7 +1,6 @@
 import { NextRequest , NextResponse } from "next/server";
 import z from "zod";
 import prisma from "../../../../prisma/client";
-import axios from 'axios'
 
 
 
@@ -37,7 +36,7 @@ export async function GET(request:NextRequest){
 
         return NextResponse.json(issues, { status: 200 });
         
-      } catch (error) {
+      } catch (error:any) {
         console.error(error);
         return NextResponse.json(
           { message: "Failed to fetch issues" },
